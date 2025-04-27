@@ -9,8 +9,9 @@ env:
   PORT: 8080
 jobs:
   test:
+    environment: testing
     env:
-      USERNAME: ${{ secrets.USERNAME }}
+      PASSWORD: ${{ secrets.PASSWORD }}
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
@@ -25,7 +26,7 @@ jobs:
       - name: Run server
         run: echo "Running Server At ${{ env.PORT }}"
       - name: Output information
-        run: echo "${{ env.DB_NAME }}, ${{ env.USERNAME }}"
+        run: echo "${{ env.DB_NAME }}, ${{ env.PASSWORD }}"
   deploy:
     needs: test
     runs-on: ubuntu-latest
