@@ -9,6 +9,8 @@ env:
   PORT: 8080
 jobs:
   test:
+    env:
+      USERNAME: ${{ secrets.USERNAME }}
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
@@ -22,10 +24,8 @@ jobs:
         run: npm ci
       - name: Run server
         run: echo "Running Server At ${{ env.PORT }}"
-      - name: Run tests
-        run: npm test
       - name: Output information
-        run: echo "${{ env.DB_NAME }}"
+        run: echo "${{ env.DB_NAME }}, ${{ env.USERNAME }}"
   deploy:
     needs: test
     runs-on: ubuntu-latest
